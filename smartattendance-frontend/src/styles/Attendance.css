@@ -1,0 +1,95 @@
+body{
+    margin:0;
+    font-family:Arial, sans-serif;
+    background:#f4f6f9;
+}
+
+.attendance-container{
+    padding:30px;
+}
+
+.attendance-container h2{
+    text-align:center;
+    color:#1565c0;
+    margin-bottom:30px;
+}
+
+.attendance-form{
+    width:350px;
+    margin:0 auto 30px auto;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+.attendance-form label{
+    display:block;
+    text-align:left;
+    margin-bottom:8px;
+    font-size:16px;
+}
+
+.attendance-form input{
+    width:100%;
+    padding:10px;
+    border:1px solid #ccc;
+    border-radius:6px;
+    font-size:15px;
+    box-sizing:border-box;
+}
+
+.attendance-table{
+    width:100%;
+    border-collapse:collapse;
+    background:white;
+    box-shadow:0 4px 10px rgba(0,0,0,0.15);
+}
+
+.attendance-table th{
+    background:#1565c0;
+    color:white;
+    padding:14px;
+    text-align:center;
+}
+
+.attendance-table td{
+    padding:12px;
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+
+.attendance-table tr:nth-child(even){
+    background:#f9f9f9;
+}
+
+.attendance-table tr:hover{
+    background:#eef5ff;
+}
+
+.attendance-table input[type="radio"]{
+    width:18px;
+    height:18px;
+    cursor:pointer;
+}
+
+.save-btn{
+    background:#1565c0;
+    color:white;
+    border:none;
+    padding:12px 35px;
+    border-radius:8px;
+    font-size:17px;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
+}
+
+.save-btn:hover{
+    background:#0d47a1;
+    transform:scale(1.05);
+}
+
+.save-btn:active{
+    transform:scale(0.98);
+}

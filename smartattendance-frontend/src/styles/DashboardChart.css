@@ -1,0 +1,26 @@
+.chart-row{
+    display:flex;
+    justify-content:space-between;
+    gap:20px;
+    margin-top:40px;
+}
+
+.chart-box{
+    width:48%;
+    height:350px;
+    background:#fff;
+    border-radius:12px;
+    box-shadow:0 4px 12px rgba(0,0,0,.12);
+    padding:15px;
+}
+
+.chart-box h3{
+    text-align:center;
+    margin-bottom:10px;
+    color:#1565c0;
+}
+
+.chart-area{
+    width:100%;
+    height:280px;
+}
