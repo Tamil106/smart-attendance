@@ -17,6 +17,10 @@ body{
 
     margin-left:260px;
 
+    width:calc(100% - 260px);
+
+    box-sizing:border-box;
+
     min-height:100vh;
 
     padding:35px;
@@ -336,8 +340,10 @@ input[type="radio"]{
 .attendance-container{
 
     margin-left:0;
+    width:100%;
 
-    padding:20px;
+    padding-top:90px;
+
 
 }
 

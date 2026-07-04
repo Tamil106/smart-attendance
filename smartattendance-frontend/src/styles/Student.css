@@ -9,6 +9,9 @@ body{
 .student-container{
 
     margin-left:260px;
+    width:calc(100% - 260px);
+
+    box-sizing:border-box;
 
     padding:35px;
 
@@ -248,7 +251,9 @@ body{
 
     margin-left:0;
 
-    padding:20px;
+    width:100%;
+
+    padding-top:90px;
 
 }
 
