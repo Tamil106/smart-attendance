@@ -349,7 +349,6 @@ body{
     font-weight:600;
 
 }
-
 /* ===========================
    TABLET
 =========================== */
@@ -360,7 +359,21 @@ body{
 
     margin-left:220px;
 
+    width:calc(100% - 220px);
+
     padding:25px;
+
+}
+
+.department-grid{
+
+    grid-template-columns:1fr;
+
+}
+
+.summary-cards{
+
+    grid-template-columns:repeat(2,1fr);
 
 }
 
@@ -378,7 +391,15 @@ body{
 
     width:100%;
 
-    padding-top:90px;
+    min-height:100vh;
+
+    padding:90px 15px 20px;
+
+}
+
+.reports-header{
+
+    margin-bottom:20px;
 
 }
 
@@ -388,22 +409,89 @@ body{
 
 }
 
+.reports-header p{
+
+    font-size:14px;
+
+}
+
+.summary-cards{
+
+    grid-template-columns:1fr;
+
+    gap:18px;
+
+}
+
+.summary-card{
+
+    padding:20px;
+
+}
+
+.summary-card h2{
+
+    font-size:30px;
+
+}
+
+.department-grid{
+
+    grid-template-columns:1fr;
+
+    gap:20px;
+
+}
+
+.department-card{
+
+    padding:15px;
+
+}
+
 .filter-box{
 
     flex-direction:column;
 
+    gap:12px;
+
 }
 
 .filter-box input,
+
 .filter-box select{
 
     width:100%;
 
+    min-width:100%;
+
 }
+
+.table-wrapper{
+
+    overflow-x:auto;
+
+}
+
+.department-table,
 
 .history-table{
 
-    min-width:800px;
+    min-width:700px;
+
+}
+
+.department-table th,
+
+.department-table td,
+
+.history-table th,
+
+.history-table td{
+
+    padding:12px;
+
+    font-size:14px;
 
 }
 

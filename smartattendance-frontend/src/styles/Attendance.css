@@ -319,13 +319,21 @@ input[type="radio"]{
    TABLET
 =========================== */
 
-@media(max-width:992px){
+@media (max-width:992px){
 
 .attendance-container{
 
     margin-left:220px;
 
+    width:calc(100% - 220px);
+
     padding:25px;
+
+}
+
+.attendance-card{
+
+    gap:20px;
 
 }
 
@@ -335,29 +343,21 @@ input[type="radio"]{
    MOBILE
 =========================== */
 
-@media(max-width:768px){
+@media (max-width:768px){
 
 .attendance-container{
 
     margin-left:0;
+
     width:100%;
 
-    padding-top:90px;
-
+    padding:85px 15px 20px;
 
 }
 
-.attendance-card{
+.attendance-header{
 
-    flex-direction:column;
-
-    align-items:stretch;
-
-}
-
-.load-btn{
-
-    width:100%;
+    margin-bottom:20px;
 
 }
 
@@ -367,9 +367,79 @@ input[type="radio"]{
 
 }
 
+.attendance-header p{
+
+    font-size:14px;
+
+}
+
+.attendance-card{
+
+    flex-direction:column;
+
+    align-items:stretch;
+
+    padding:20px;
+
+    gap:15px;
+
+}
+
+.form-group{
+
+    width:100%;
+
+    min-width:100%;
+
+}
+
+.form-group select,
+
+.form-group input{
+
+    width:100%;
+
+}
+
+.load-btn{
+
+    width:100%;
+
+}
+
+.table-wrapper{
+
+    overflow-x:auto;
+
+}
+
 .attendance-table{
 
-    min-width:700px;
+    min-width:650px;
+
+}
+
+.attendance-table th,
+
+.attendance-table td{
+
+    padding:12px;
+
+    font-size:14px;
+
+}
+
+.save-section{
+
+    margin-top:25px;
+
+}
+
+.save-btn{
+
+    width:100%;
+
+    padding:15px;
 
 }
 

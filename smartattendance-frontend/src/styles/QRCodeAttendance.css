@@ -233,7 +233,6 @@ body{
     line-height:1.5;
 
 }
-
 /* ==========================
    TABLET
 ========================== */
@@ -244,7 +243,15 @@ body{
 
     margin-left:220px;
 
+    width:calc(100% - 220px);
+
     padding:25px;
+
+}
+
+.qr-container{
+
+    gap:25px;
 
 }
 
@@ -262,24 +269,15 @@ body{
 
     width:100%;
 
-    padding-top:90px;
+    min-height:100vh;
+
+    padding:90px 15px 20px;
 
 }
 
-.qr-container{
+.qr-header{
 
-    flex-direction:column;
-
-    align-items:center;
-
-}
-
-.qr-card,
-.instruction-card{
-
-    width:100%;
-
-    max-width:420px;
+    margin-bottom:25px;
 
 }
 
@@ -289,5 +287,52 @@ body{
 
 }
 
+.qr-header p{
+
+    font-size:15px;
+
 }
 
+.qr-container{
+
+    flex-direction:column;
+
+    align-items:center;
+
+    gap:20px;
+
+}
+
+.qr-card,
+
+.instruction-card{
+
+    width:100%;
+
+    max-width:450px;
+
+    padding:20px;
+
+    border-radius:15px;
+
+}
+
+.qr-box{
+
+    padding:15px;
+
+}
+
+.generate-btn{
+
+    width:100%;
+
+}
+
+.instruction-card li{
+
+    font-size:16px;
+
+}
+
+}
