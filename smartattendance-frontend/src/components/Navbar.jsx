@@ -1,9 +1,11 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "../styles/Navbar.css";
 
 function Navbar() {
 
     const navigate = useNavigate();
+
+    const location = useLocation();
 
     const role = localStorage.getItem("role");
 
@@ -19,39 +21,93 @@ function Navbar() {
 
     return (
 
-        <nav className="navbar">
+        <div className="sidebar">
 
-            <h2>Smart Attendance</h2>
+            <div className="sidebar-top">
 
-            <div>
+                <div className="logo">
+
+                    🎓
+
+                </div>
+
+                <h2>Smart Attendance</h2>
+
+                <p>Management System</p>
+
+            </div>
+
+            <div className="sidebar-menu">
 
                 {role === "ADMIN" ? (
+
                     <>
-                        <Link to="/dashboard">Dashboard</Link>
 
-                        <Link to="/students">Students</Link>
-
-                        <Link to="/attendance">Attendance</Link>
-
-                        <Link to="/reports">Reports</Link>
-
-                        <Link to="/generate-qr">QR Attendance</Link>
-                    </>
-                ) : (
-                    <>
-                        <Link to="/student-dashboard">
-                            My Dashboard
+                        <Link
+                            className={location.pathname === "/dashboard" ? "active" : ""}
+                            to="/dashboard"
+                        >
+                            Dashboard
                         </Link>
+
+                        <Link
+                            className={location.pathname === "/students" ? "active" : ""}
+                            to="/students"
+                        >
+                            Students
+                        </Link>
+
+                        <Link
+                            className={location.pathname === "/attendance" ? "active" : ""}
+                            to="/attendance"
+                        >
+                            Attendance
+                        </Link>
+
+                        <Link
+                            className={location.pathname === "/reports" ? "active" : ""}
+                            to="/reports"
+                        >
+                            Reports
+                        </Link>
+
+                        <Link
+                            className={location.pathname === "/generate-qr" ? "active" : ""}
+                            to="/generate-qr"
+                        >
+                            QR Attendance
+                        </Link>
+
                     </>
+
+                ) : (
+
+                    <>
+
+                        <Link
+                            className={location.pathname === "/student-dashboard" ? "active" : ""}
+                            to="/student-dashboard"
+                        >
+                            🎓 My Dashboard
+                        </Link>
+
+                    </>
+
                 )}
 
+            </div>
+
+            <div className="sidebar-bottom">
+
                 <button onClick={logout}>
+
                     Logout
+
                 </button>
 
             </div>
 
-        </nav>
+        </div>
 
     );
 

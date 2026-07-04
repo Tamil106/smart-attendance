@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
 import Navbar from "./Navbar";
+import "../styles/Reports.css";
 
 function Reports() {
 
@@ -14,30 +15,44 @@ function Reports() {
     const [status, setStatus] = useState("All");
 
     useEffect(() => {
+
         loadStats();
         loadStudents();
         loadAttendance();
         loadDepartmentReport();
+
     }, []);
 
     const loadStats = async () => {
+
         const response = await API.get("/dashboard");
+
         setStats(response.data);
+
     };
 
     const loadStudents = async () => {
+
         const response = await API.get("/students");
+
         setStudents(response.data);
+
     };
 
     const loadAttendance = async () => {
+
         const response = await API.get("/attendance");
+
         setAttendanceList(response.data);
+
     };
 
     const loadDepartmentReport = async () => {
+
         const response = await API.get("/reports/department-report");
+
         setDepartmentReport(response.data);
+
     };
 
     const filteredAttendance = attendanceList.filter((record) => {
@@ -53,244 +68,259 @@ function Reports() {
             student.rollNumber.toLowerCase().includes(search.toLowerCase());
 
         const matchDate =
-            selectedDate === "" || record.date === selectedDate;
+            selectedDate === "" ||
+            record.date === selectedDate;
 
         const matchStatus =
-            status === "All" || record.status === status;
+            status === "All" ||
+            record.status === status;
 
         return matchSearch && matchDate && matchStatus;
 
     });
 
     return (
+
         <>
+
             <Navbar />
 
-            <div style={{ padding: "30px" }}>
+            <div className="reports-container">
 
-                <h2 style={{ textAlign: "center" }}>
-                    Attendance Reports
-                </h2>
+                <div className="reports-header">
 
-                <table
-                    border="1"
-                    cellPadding="15"
-                    style={{
-                        margin: "20px auto",
-                        width: "50%",
-                        borderCollapse: "collapse"
-                    }}
-                >
-                    <tbody>
+                    <h1>📊 Attendance Reports</h1>
 
-                    <tr>
-                        <td><b>Total Students</b></td>
-                        <td>{stats.totalStudents}</td>
-                    </tr>
+                    <p>
+                        View attendance statistics and department-wise reports.
+                    </p>
 
-                    <tr>
-                        <td><b>Total Attendance Records</b></td>
-                        <td>{stats.totalAttendance}</td>
-                    </tr>
+                </div>
 
-                    <tr>
-                        <td><b>Today's Present</b></td>
-                        <td>{stats.presentToday}</td>
-                    </tr>
+                <div className="summary-cards">
 
-                    <tr>
-                        <td><b>Today's Absent</b></td>
-                        <td>{stats.absentToday}</td>
-                    </tr>
+                    <div className="summary-card students">
 
-                    </tbody>
-                </table>
+                        <h3>Total Students</h3>
 
-                <hr />
+                        <h2>{stats.totalStudents}</h2>
 
-                <h2 style={{ textAlign: "center" }}>
-                    Student Attendance Percentage
-                </h2>
+                    </div>
 
-                <div
-                    style={{
-                        display: "flex",
-                        justifyContent: "space-between",
-                        gap: "30px",
-                        marginTop: "30px",
-                        flexWrap: "wrap"
-                    }}
-                >
+                    <div className="summary-card present">
 
-                    {Object.keys(departmentReport).map(department => (
+                        <h3>Present Today</h3>
 
-                        <div
-                            key={department}
-                            style={{ flex: "1", minWidth: "350px" }}
-                        >
+                        <h2>{stats.presentToday}</h2>
 
-                            <h3 style={{ textAlign: "center" }}>
-                                {department} Department
-                            </h3>
+                    </div>
 
-                            <table
-                                border="1"
-                                cellPadding="10"
-                                style={{
-                                    width: "100%",
-                                    borderCollapse: "collapse"
-                                }}
+                    <div className="summary-card absent">
+
+                        <h3>Absent Today</h3>
+
+                        <h2>{stats.absentToday}</h2>
+
+                    </div>
+
+                    <div className="summary-card records">
+
+                        <h3>Total Records</h3>
+
+                        <h2>{stats.totalAttendance}</h2>
+
+                    </div>
+
+                </div>
+
+                <div className="department-section">
+
+                    <h2>Department Attendance Percentage</h2>
+
+                    <div className="department-grid">
+
+                        {Object.keys(departmentReport).map((department) => (
+
+                            <div
+                                className="department-card"
+                                key={department}
                             >
 
-                                <thead>
+                                <h3>{department}</h3>
+
+                                <table className="department-table">
+
+                                    <thead>
+
+                                        <tr>
+
+                                            <th>Student</th>
+
+                                            <th>%</th>
+
+                                        </tr>
+
+                                    </thead>
+
+                                    <tbody>
+
+                                        {departmentReport[department].map(student => (
+
+                                            <tr key={student.name}>
+
+                                                <td>{student.name}</td>
+
+                                                <td>
+
+                                                    {student.percentage.toFixed(2)}%
+
+                                                </td>
+
+                                            </tr>
+
+                                        ))}
+
+                                    </tbody>
+
+                                </table>
+
+                            </div>
+
+                        ))}
+
+                    </div>
+
+                </div>
+
+                <div className="history-section">
+
+                    <h2>Attendance History</h2>
+
+                    <div className="filter-box">
+
+                        <input
+
+                            type="text"
+
+                            placeholder="🔍 Search Student"
+
+                            value={search}
+
+                            onChange={(e)=>setSearch(e.target.value)}
+
+                        />
+
+                        <input
+
+                            type="date"
+
+                            value={selectedDate}
+
+                            onChange={(e)=>setSelectedDate(e.target.value)}
+
+                        />
+
+                        <select
+
+                            value={status}
+
+                            onChange={(e)=>setStatus(e.target.value)}
+
+                        >
+
+                            <option value="All">All</option>
+
+                            <option value="Present">Present</option>
+
+                            <option value="Absent">Absent</option>
+
+                        </select>
+
+                    </div>
+
+                    <div className="table-wrapper">
+
+                        <table className="history-table">
+
+                            <thead>
 
                                 <tr>
-                                    <th>Student</th>
-                                    <th>Attendance %</th>
+
+                                    <th>Department</th>
+
+                                    <th>Roll No</th>
+
+                                    <th>Name</th>
+
+                                    <th>Date</th>
+
+                                    <th>Status</th>
+
                                 </tr>
 
-                                </thead>
+                            </thead>
 
-                                <tbody>
+                            <tbody>
+                                                                {filteredAttendance.map((record) => {
 
-                                {departmentReport[department].map(student => (
+                                    const student = students.find(
+                                        s => s.id === record.studentId
+                                    );
 
-                                    <tr key={student.name}>
+                                    return (
 
-                                        <td>{student.name}</td>
+                                        <tr key={record.id}>
 
-                                        <td>
-                                            {student.percentage.toFixed(2)}%
-                                        </td>
+                                            <td>{student?.department}</td>
 
-                                    </tr>
+                                            <td>{student?.rollNumber}</td>
 
-                                ))}
+                                            <td>{student?.name}</td>
 
-                                </tbody>
+                                            <td>{record.date}</td>
 
-                            </table>
+                                            <td>
 
-                        </div>
+                                                {record.status === "Present" ? (
 
-                    ))}
+                                                    <span className="present-status">
 
-                </div>
+                                                        ✅ Present
 
-                <hr />
+                                                    </span>
 
-                <h2 style={{ textAlign: "center" }}>
-                    Attendance History
-                </h2>
+                                                ) : (
 
-                <div
-                    style={{
-                        display: "flex",
-                        gap: "15px",
-                        marginBottom: "20px",
-                        flexWrap: "wrap"
-                    }}
-                >
+                                                    <span className="absent-status">
 
-                    <input
-                        type="text"
-                        placeholder="Search Student"
-                        value={search}
-                        onChange={(e) =>
-                            setSearch(e.target.value)
-                        }
-                    />
+                                                        ❌ Absent
 
-                    <input
-                        type="date"
-                        value={selectedDate}
-                        onChange={(e) =>
-                            setSelectedDate(e.target.value)
-                        }
-                    />
+                                                    </span>
 
-                    <select
-                        value={status}
-                        onChange={(e) =>
-                            setStatus(e.target.value)
-                        }
-                    >
-                        <option value="All">All</option>
-                        <option value="Present">Present</option>
-                        <option value="Absent">Absent</option>
-                    </select>
+                                                )}
+
+                                            </td>
+
+                                        </tr>
+
+                                    );
+
+                                })}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
 
                 </div>
-
-                <table
-                    border="1"
-                    cellPadding="10"
-                    style={{
-                        width: "100%",
-                        borderCollapse: "collapse"
-                    }}
-                >
-
-                    <thead>
-
-                    <tr>
-                        <th>Department</th>
-                        <th>Roll No</th>
-                        <th>Student Name</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                    {filteredAttendance.map(record => {
-
-                        const student = students.find(
-                            s => s.id === record.studentId
-                        );
-
-                        return (
-
-                            <tr key={record.id}>
-
-                                <td>{student?.department}</td>
-
-                                <td>{student?.rollNumber}</td>
-
-                                <td>{student?.name}</td>
-
-                                <td>{record.date}</td>
-
-                                <td
-                                    style={{
-                                        color:
-                                            record.status === "Present"
-                                                ? "green"
-                                                : "red",
-                                        fontWeight: "bold"
-                                    }}
-                                >
-                                    {record.status === "Present"
-                                        ? "✅ Present"
-                                        : "❌ Absent"}
-                                </td>
-
-                            </tr>
-
-                        );
-
-                    })}
-
-                    </tbody>
-
-                </table>
 
             </div>
 
         </>
+
     );
+
 }
 
 export default Reports;

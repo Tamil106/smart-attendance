@@ -11,7 +11,6 @@ function Attendance() {
     const [attendance, setAttendance] = useState({});
     const [selectedDate, setSelectedDate] = useState(today);
     const [department, setDepartment] = useState("");
-
     const [departments, setDepartments] = useState([]);
 
     useEffect(() => {
@@ -26,15 +25,23 @@ function Attendance() {
 
     const loadStudents = async () => {
 
-        const response = await API.get("/students");
+        try {
 
-        const allStudents = response.data;
+            const response = await API.get("/students");
 
-        const uniqueDepartments = [
-            ...new Set(allStudents.map(student => student.department))
-        ];
+            const allStudents = response.data;
 
-        setDepartments(uniqueDepartments);
+            const uniqueDepartments = [
+                ...new Set(allStudents.map(student => student.department))
+            ];
+
+            setDepartments(uniqueDepartments);
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
 
     };
 
@@ -42,27 +49,35 @@ function Attendance() {
 
         if (department === "") {
 
-            alert("Select Department");
+            alert("Please select a department.");
 
             return;
 
         }
 
-        const response = await API.get(
-            `/students/department/${department}`
-        );
+        try {
 
-        setStudents(response.data);
+            const response = await API.get(
+                `/students/department/${department}`
+            );
 
-        const temp = {};
+            setStudents(response.data);
 
-        response.data.forEach(student => {
+            const temp = {};
 
-            temp[student.id] = "Present";
+            response.data.forEach(student => {
 
-        });
+                temp[student.id] = "Present";
 
-        setAttendance(temp);
+            });
+
+            setAttendance(temp);
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
 
     };
 
@@ -70,16 +85,22 @@ function Attendance() {
 
         try {
 
-            const response = await API.get(`/attendance/date/${selectedDate}`);
+            const response = await API.get(
+                `/attendance/date/${selectedDate}`
+            );
 
             const temp = {};
 
             students.forEach(student => {
+
                 temp[student.id] = "Present";
+
             });
 
             response.data.forEach(record => {
+
                 temp[record.studentId] = record.status;
+
             });
 
             setAttendance(temp);
@@ -97,9 +118,13 @@ function Attendance() {
         try {
 
             const attendanceData = students.map(student => ({
+
                 studentId: student.id,
+
                 date: selectedDate,
+
                 status: attendance[student.id]
+
             }));
 
             await API.post("/attendance/save-all", attendanceData);
@@ -110,7 +135,7 @@ function Attendance() {
 
             console.log(error);
 
-            alert("Error Saving Attendance!");
+            alert("Error Saving Attendance");
 
         }
 
@@ -119,122 +144,208 @@ function Attendance() {
     return (
 
         <>
+
             <Navbar />
 
             <div className="attendance-container">
 
-                <h2>Attendance Management</h2>
+                <div className="attendance-header">
 
-                <div className="attendance-form">
+                    <div>
 
-                    <label><b>Department</b></label>
+                        <h1>📅 Attendance Management</h1>
 
-                    <select
-                        value={department}
-                        onChange={(e)=>setDepartment(e.target.value)}
+                        <p>
+
+                            Select a department, mark attendance and save records.
+
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <div className="attendance-card">
+
+                    <div className="form-group">
+
+                        <label>Department</label>
+
+                        <select
+
+                            value={department}
+
+                            onChange={(e)=>setDepartment(e.target.value)}
+
+                        >
+
+                            <option value="">
+
+                                Select Department
+
+                            </option>
+
+                            {departments.map(dep=>(
+
+                                <option
+
+                                    key={dep}
+
+                                    value={dep}
+
+                                >
+
+                                    {dep}
+
+                                </option>
+
+                            ))}
+
+                        </select>
+
+                    </div>
+
+                    <div className="form-group">
+
+                        <label>Date</label>
+
+                        <input
+
+                            type="date"
+
+                            value={selectedDate}
+
+                            onChange={(e)=>
+
+                                setSelectedDate(e.target.value)
+
+                            }
+
+                        />
+
+                    </div>
+
+                    <button
+
+                        className="load-btn"
+
+                        onClick={loadStudentsByDepartment}
+
                     >
 
-                        <option value="">Select Department</option>
-
-                        {departments.map(dep=>(
-                            <option key={dep} value={dep}>
-                                {dep}
-                            </option>
-                        ))}
-
-                    </select>
-
-                    <br/><br/>
-
-                    <label><b>Date</b></label>
-
-                    <input
-                        type="date"
-                        value={selectedDate}
-                        onChange={(e)=>setSelectedDate(e.target.value)}
-                    />
-
-                    <br/><br/>
-
-                    <button onClick={loadStudentsByDepartment}>
                         Load Students
+
                     </button>
 
                 </div>
 
-                <table className="attendance-table">
+                <div className="table-wrapper">
 
-                    <thead>
+                    <table className="attendance-table">
 
-                    <tr>
-                        <th>Roll No</th>
-                        <th>Name</th>
-                        <th>Department</th>
-                        <th>Present</th>
-                        <th>Absent</th>
-                    </tr>
+                        <thead>
 
-                    </thead>
+                        <tr>
 
-                    <tbody>
+                            <th>Roll No</th>
 
-                    {students.map(student => (
+                            <th>Name</th>
 
-                        <tr key={student.id}>
+                            <th>Department</th>
 
-                            <td>{student.rollNumber}</td>
+                            <th>✅ Present</th>
 
-                            <td>{student.name}</td>
-
-                            <td>{student.department}</td>
-
-                            <td>
-
-                                <input
-                                    type="radio"
-                                    name={`status-${student.id}`}
-                                    checked={attendance[student.id] === "Present"}
-                                    onChange={() =>
-                                        setAttendance({
-                                            ...attendance,
-                                            [student.id]: "Present"
-                                        })
-                                    }
-                                />
-
-                            </td>
-
-                            <td>
-
-                                <input
-                                    type="radio"
-                                    name={`status-${student.id}`}
-                                    checked={attendance[student.id] === "Absent"}
-                                    onChange={() =>
-                                        setAttendance({
-                                            ...attendance,
-                                            [student.id]: "Absent"
-                                        })
-                                    }
-                                />
-
-                            </td>
+                            <th>❌ Absent</th>
 
                         </tr>
 
-                    ))}
+                        </thead>
 
-                    </tbody>
+                        <tbody>
+                                                    {students.map((student) => (
 
-                </table>
+                            <tr key={student.id}>
 
-                <div style={{ textAlign: "center", marginTop: "25px" }}>
+                                <td>{student.rollNumber}</td>
+
+                                <td>{student.name}</td>
+
+                                <td>{student.department}</td>
+
+                                <td>
+
+                                    <label className="radio-label">
+
+                                        <input
+                                            type="radio"
+                                            name={`status-${student.id}`}
+                                            checked={
+                                                attendance[student.id] === "Present"
+                                            }
+                                            onChange={() =>
+                                                setAttendance({
+                                                    ...attendance,
+                                                    [student.id]: "Present"
+                                                })
+                                            }
+                                        />
+
+                                        <span className="present-badge">
+                                            Present
+                                        </span>
+
+                                    </label>
+
+                                </td>
+
+                                <td>
+
+                                    <label className="radio-label">
+
+                                        <input
+                                            type="radio"
+                                            name={`status-${student.id}`}
+                                            checked={
+                                                attendance[student.id] === "Absent"
+                                            }
+                                            onChange={() =>
+                                                setAttendance({
+                                                    ...attendance,
+                                                    [student.id]: "Absent"
+                                                })
+                                            }
+                                        />
+
+                                        <span className="absent-badge">
+                                            Absent
+                                        </span>
+
+                                    </label>
+
+                                </td>
+
+                            </tr>
+
+                        ))}
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+                <div className="save-section">
 
                     <button
+
                         className="save-btn"
+
                         onClick={saveAttendance}
+
                     >
-                        Save Attendance
+
+                        💾 Save Attendance
+
                     </button>
 
                 </div>

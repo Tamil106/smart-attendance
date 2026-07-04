@@ -1,0 +1,288 @@
+/* ==========================
+   QR PAGE
+========================== */
+
+body{
+    margin:0;
+    padding:0;
+    font-family:'Poppins',sans-serif;
+    background:#eef5ff;
+}
+
+.qr-page{
+
+    margin-left:260px;
+
+    padding:35px;
+
+    min-height:100vh;
+
+    background:#eef5ff;
+
+}
+
+/* ==========================
+   HEADER
+========================== */
+
+.qr-header{
+
+    text-align:center;
+
+    margin-bottom:35px;
+
+}
+
+.qr-header h1{
+
+    font-size:34px;
+
+    color:#1e3a8a;
+
+    margin-bottom:10px;
+
+}
+
+.qr-header p{
+
+    color:#64748b;
+
+    font-size:16px;
+
+}
+
+/* ==========================
+   MAIN CONTAINER
+========================== */
+
+.qr-container{
+
+    display:flex;
+
+    justify-content:center;
+
+    gap:35px;
+
+    flex-wrap:wrap;
+
+}
+
+/* ==========================
+   QR CARD
+========================== */
+
+.qr-card{
+
+    width:380px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    text-align:center;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+}
+
+.qr-card h2{
+
+    color:#2563eb;
+
+    margin-bottom:25px;
+
+}
+
+.qr-box{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    background:#ffffff;
+
+    padding:20px;
+
+    border:2px dashed #93c5fd;
+
+    border-radius:18px;
+
+    margin-bottom:20px;
+
+}
+
+.date{
+
+    margin-top:15px;
+
+    font-size:17px;
+
+    color:#374151;
+
+}
+
+.status{
+
+    display:inline-block;
+
+    margin-top:15px;
+
+    padding:10px 18px;
+
+    background:#dcfce7;
+
+    color:#166534;
+
+    border-radius:30px;
+
+    font-weight:600;
+
+}
+
+/* ==========================
+   BUTTON
+========================== */
+
+.generate-btn{
+
+    width:100%;
+
+    margin-top:25px;
+
+    padding:14px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:#2563eb;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:600;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.generate-btn:hover{
+
+    background:#1d4ed8;
+
+    transform:translateY(-2px);
+
+}
+
+/* ==========================
+   INSTRUCTION CARD
+========================== */
+
+.instruction-card{
+
+    width:380px;
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:30px;
+
+    box-shadow:0 12px 30px rgba(0,0,0,.08);
+
+}
+
+.instruction-card h2{
+
+    text-align:center;
+
+    color:#2563eb;
+
+    margin-bottom:20px;
+
+}
+
+.instruction-card ol{
+    display: inline-block;
+
+    text-align: left;
+    margin: 20px auto;
+
+    padding-left:25px;
+
+}
+
+.instruction-card li{
+
+    margin-bottom:10px;
+
+    font-size:18px;
+
+    color:#475569;
+
+    line-height:1.5;
+
+}
+
+/* ==========================
+   TABLET
+========================== */
+
+@media(max-width:992px){
+
+.qr-page{
+
+    margin-left:220px;
+
+    padding:25px;
+
+}
+
+}
+
+/* ==========================
+   MOBILE
+========================== */
+
+@media(max-width:768px){
+
+.qr-page{
+
+    margin-left:0;
+
+    padding:20px;
+
+}
+
+.qr-container{
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
+.qr-card,
+.instruction-card{
+
+    width:100%;
+
+    max-width:420px;
+
+}
+
+.qr-header h1{
+
+    font-size:28px;
+
+}
+
+}
+

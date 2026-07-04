@@ -1,82 +1,271 @@
-.student-container {
-    padding: 30px;
-    text-align: center;
-    background-color: #f4f6f9;
-    min-height: 100vh;
+body{
+    margin:0;
+    font-family:'Poppins',sans-serif;
+    background:#eef5ff;
 }
 
-.student-container h2 {
-    color: #1565c0;
-    margin-bottom: 20px;
+/* Main Container */
+
+.student-container{
+
+    margin-left:260px;
+
+    padding:35px;
+
+    min-height:100vh;
+
+    background:#eef5ff;
+
 }
 
-.student-form {
-    background: white;
-    width: 400px;
-    margin: auto;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+/* Header */
+
+.student-header{
+
+    margin-bottom:30px;
+
 }
 
-.student-form input {
-    width: 95%;
-    padding: 10px;
-    margin: 8px 0;
-    border-radius: 5px;
-    border: 1px solid #ccc;
+.student-header h1{
+
+    color:#1e3a8a;
+
+    margin-bottom:8px;
+
 }
 
-.student-form button {
-    width: 100%;
-    padding: 12px;
-    background: #1565c0;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
+.student-header p{
+
+    color:#64748b;
+
 }
 
-.student-form button:hover {
-    background: #0d47a1;
+/* Form */
+
+.student-form{
+
+    background:white;
+
+    border-radius:18px;
+
+    padding:30px;
+
+    max-width:600px;
+
+    margin:auto;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
 }
 
-.student-table {
-    width: 100%;
-    margin-top: 30px;
-    border-collapse: collapse;
-    background: white;
-    box-shadow: 0px 4px 10px rgba(0,0,0,0.15);
+.student-form input{
+
+    width:100%;
+
+    padding:14px;
+
+    margin:10px 0;
+
+    border:1px solid #d1d5db;
+
+    border-radius:10px;
+
+    outline:none;
+
+    font-size:15px;
+
 }
 
-.student-table th {
-    background: #1565c0;
-    color: white;
-    padding: 12px;
+.student-form input:focus{
+
+    border-color:#2563eb;
+
 }
 
-.student-table td {
-    padding: 10px;
-    border-bottom: 1px solid #ddd;
+.student-form button{
+
+    width:100%;
+
+    padding:15px;
+
+    margin-top:15px;
+
+    border:none;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
+    cursor:pointer;
+
+    transition:.3s;
+
 }
 
-.student-table tr:hover {
-    background: #f1f1f1;
+.student-form button:hover{
+
+    transform:translateY(-2px);
+
 }
 
-.action-btn {
-    margin: 2px;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 5px;
-    color: white;
-    cursor: pointer;
+/* Search */
+
+.search-box{
+
+    margin:35px auto;
+
+    max-width:500px;
+
 }
 
-.edit-btn {
-    background: orange;
+.search-box input{
+
+    width:100%;
+
+    padding:14px;
+
+    border-radius:30px;
+
+    border:1px solid #d1d5db;
+
+    font-size:15px;
+
+    outline:none;
+
 }
 
-.delete-btn {
-    background: red;
+/* Table */
+
+.student-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+    background:white;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+
+.student-table th{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:16px;
+
+    font-size:15px;
+
+}
+
+.student-table td{
+
+    padding:14px;
+
+    border-bottom:1px solid #e5e7eb;
+
+}
+
+.student-table tr:hover{
+
+    background:#f8fbff;
+
+}
+
+/* Buttons */
+
+.action-btn{
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:8px 15px;
+
+    margin:4px;
+
+    color:white;
+
+    cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.edit-btn{
+
+    background:#f59e0b;
+
+}
+
+.edit-btn:hover{
+
+    background:#d97706;
+
+}
+
+.delete-btn{
+
+    background:#ef4444;
+
+}
+
+.delete-btn:hover{
+
+    background:#dc2626;
+
+}
+
+/* Responsive */
+
+@media(max-width:992px){
+
+.student-container{
+
+    margin-left:220px;
+
+    padding:25px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.student-container{
+
+    margin-left:0;
+
+    padding:20px;
+
+}
+
+.student-form{
+
+    padding:20px;
+
+}
+
+.student-table{
+
+    display:block;
+
+    overflow-x:auto;
+
+    white-space:nowrap;
+
+}
+
 }

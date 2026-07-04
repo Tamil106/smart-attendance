@@ -57,49 +57,50 @@ function Login() {
 
     };
 
-    return (
+   return (
+    <div className="login-container">
+        <div className="design1"></div>
+        <div className="design2"></div>
 
-        <div className="login-container">
+        <div className="login-box">
+             
+             <div className="logo">🎓</div>
+            <h2>SMART ATTENDANCE</h2>
 
-            <div className="login-box">
+            <h3>Welcome Back 👋</h3>
 
-                <h2><b>SMART ATTENDANCE</b></h2>
+            <h4>{role} Login</h4>
 
-                <h3>{role} Login</h3>
+            <select
+                value={role}
+                onChange={(e) => setRole(e.target.value)}
+            >
+                <option value="ADMIN">Admin</option>
+                <option value="STUDENT">Student</option>
+            </select>
 
-                <select
-                    value={role}
-                    onChange={(e) => setRole(e.target.value)}
-                >
-                    <option value="ADMIN">Admin</option>
-                    <option value="STUDENT">Student</option>
-                </select>
+            <input
+                type="text"
+                placeholder={role === "ADMIN" ? "Username" : "Roll Number"}
+                value={username}
+                onChange={(e) => setUsername(e.target.value)}
+            />
 
-                <br /><br />
+            <input
+                type="password"
+                placeholder="Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+            />
 
-                <input
-                    type="text"
-                    placeholder={role === "ADMIN" ? "Username" : "Roll Number"}
-                    value={username}
-                    onChange={(e) => setUsername(e.target.value)}
-                />
-
-                <input
-                    type="password"
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                />
-
-                <button onClick={login}>
-                    Login
-                </button>
-
-            </div>
+            <button onClick={login}>
+                Login
+            </button>
 
         </div>
 
-    );
+    </div>
+);
 
 }
 

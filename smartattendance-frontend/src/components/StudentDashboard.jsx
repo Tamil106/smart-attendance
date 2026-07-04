@@ -10,87 +10,222 @@ function StudentDashboard() {
     const [percentage, setPercentage] = useState(0);
     const [attendance, setAttendance] = useState([]);
 
+    const [presentCount, setPresentCount] = useState(0);
+    const [absentCount, setAbsentCount] = useState(0);
+
     useEffect(() => {
+
         loadData();
+
     }, []);
 
     const loadData = async () => {
 
-        const percentageResponse = await API.get(
-            `/attendance/percentage/${student.id}`
-        );
+        try {
 
-        const attendanceResponse = await API.get(
-            `/attendance/student/${student.id}`
-        );
+            const percentageResponse = await API.get(
+                `/attendance/percentage/${student.id}`
+            );
 
-        setPercentage(percentageResponse.data);
-        setAttendance(attendanceResponse.data);
+            const attendanceResponse = await API.get(
+                `/attendance/student/${student.id}`
+            );
+
+            setPercentage(percentageResponse.data);
+
+            setAttendance(attendanceResponse.data);
+
+            const present = attendanceResponse.data.filter(
+                a => a.status === "Present"
+            ).length;
+
+            const absent = attendanceResponse.data.filter(
+                a => a.status === "Absent"
+            ).length;
+
+            setPresentCount(present);
+
+            setAbsentCount(absent);
+
+        }
+
+        catch(error){
+
+            console.log(error);
+
+        }
 
     };
 
     return (
+
         <>
+
             <Navbar />
 
             <div className="student-dashboard">
 
-                <h1>Welcome, {student.name}</h1>
+                <div className="student-header">
 
-                <div className="student-cards">
+                    <div className="profile-circle">
 
-                    <div className="student-card">
-                        <h3>Roll Number</h3>
-                        <p>{student.rollNumber}</p>
+                        👨‍🎓
+
                     </div>
 
-                    <div className="student-card">
-                        <h3>Department</h3>
-                        <p>{student.department}</p>
-                    </div>
+                    <div>
 
-                    <div className="student-card">
-                        <h3>Year</h3>
-                        <p>{student.year}</p>
-                    </div>
+                        <h1>
 
-                    <div className="student-card">
-                        <h3>Attendance %</h3>
-                        <p>{percentage.toFixed(2)}%</p>
+                            Welcome, {student.name}
+
+                        </h1>
+
+                        <p>
+
+                            View your attendance details and academic record.
+
+                        </p>
+
                     </div>
 
                 </div>
 
-                <h2>Attendance History</h2>
+                <div className="student-cards">
 
-                <table className="attendance-table">
+                    <div className="student-card blue">
 
-                    <thead>
-                    <tr>
-                        <th>Date</th>
-                        <th>Status</th>
-                    </tr>
-                    </thead>
+                        <h3>🎓 Roll Number</h3>
 
-                    <tbody>
+                        <p>{student.rollNumber}</p>
 
-                    {attendance.map((a) => (
+                    </div>
 
-                        <tr key={a.id}>
-                            <td>{a.date}</td>
-                            <td>{a.status}</td>
-                        </tr>
+                    <div className="student-card green">
 
-                    ))}
+                        <h3>🏫 Department</h3>
 
-                    </tbody>
+                        <p>{student.department}</p>
 
-                </table>
+                    </div>
+
+                    <div className="student-card orange">
+
+                        <h3>📚 Year</h3>
+
+                        <p>{student.year}</p>
+
+                    </div>
+
+                    <div className="student-card purple">
+
+                        <h3>📊 Attendance</h3>
+
+                        <p>{percentage.toFixed(2)}%</p>
+
+                    </div>
+
+                    <div className="student-card success">
+
+                        <h3>✅ Present</h3>
+
+                        <p>{presentCount}</p>
+
+                    </div>
+
+                    <div className="student-card danger">
+
+                        <h3>❌ Absent</h3>
+
+                        <p>{absentCount}</p>
+
+                    </div>
+
+                </div>
+
+                <div className="history-card">
+
+                    <h2>
+
+                        📅 Attendance History
+
+                    </h2>
+
+                    <div className="table-wrapper">
+
+                        <table className="attendance-table">
+
+                            <thead>
+
+                                <tr>
+
+                                    <th>Date</th>
+
+                                    <th>Status</th>
+
+                                </tr>
+
+                            </thead>
+
+                            <tbody>
+                                                            {attendance.length > 0 ? (
+
+                                attendance.map((a) => (
+
+                                    <tr key={a.id}>
+
+                                        <td>{a.date}</td>
+
+                                        <td>
+
+                                            <span
+                                                className={
+                                                    a.status === "Present"
+                                                        ? "status present"
+                                                        : "status absent"
+                                                }
+                                            >
+
+                                                {a.status === "Present"
+                                                    ? "✅ Present"
+                                                    : "❌ Absent"}
+
+                                            </span>
+
+                                        </td>
+
+                                    </tr>
+
+                                ))
+
+                            ) : (
+
+                                <tr>
+
+                                    <td colSpan="2">
+
+                                        No Attendance Records Found
+
+                                    </td>
+
+                                </tr>
+
+                            )}
+
+                            </tbody>
+
+                        </table>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </>
+
     );
+
 }
 
 export default StudentDashboard;

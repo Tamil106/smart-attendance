@@ -1,32 +1,206 @@
-.navbar{
+/* ===========================
+   SIDEBAR
+=========================== */
+
+.sidebar{
+
+    position:fixed;
+
+    top:0;
+
+    left:0;
+
+    width:260px;
+
+    height:100vh;
+
+    background:linear-gradient(
+        180deg,
+        #1e3a8a,
+        #2563eb,
+        #3b82f6
+    );
+
+    color:white;
+
     display:flex;
+
+    flex-direction:column;
+
     justify-content:space-between;
+
+    box-shadow:5px 0 20px rgba(0,0,0,.15);
+
+    z-index:1000;
+
+}
+
+/* ===========================
+   TOP
+=========================== */
+
+.sidebar-top{
+
+    text-align:center;
+
+    padding:35px 20px;
+
+}
+
+.sidebar .logo{
+
+    width:90px;
+
+    height:90px;
+
+    margin:auto;
+
+    border-radius:50%;
+
+    background:white;
+
+    color:#2563eb;
+
+    display:flex;
+
+    justify-content:center;
+
     align-items:center;
-    background:#1565c0;
-    color:white;
-    padding:15px 30px;
-}
 
-.navbar h2{
-    margin:0;
-}
+    font-size:42px;
 
-.navbar a{
-    color:white;
-    text-decoration:none;
-    margin-right:20px;
     font-weight:bold;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.2);
+
+    margin-bottom:18px;
+
 }
 
-.navbar a:hover{
-    text-decoration:underline;
-}
+.sidebar h2{
 
-.navbar button{
-    background:red;
+    margin:0;
+
+    font-size:24px;
+
     color:white;
+
+}
+
+.sidebar p{
+
+    margin-top:6px;
+
+    color:#dbeafe;
+
+    font-size:14px;
+
+}
+
+/* ===========================
+   MENU
+=========================== */
+
+.sidebar-menu{
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:10px;
+
+    gap:8px;
+
+}
+
+.sidebar-menu a{
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 20px;
+
+    border-radius:12px;
+
+    transition:.3s;
+
+    font-size:16px;
+
+    font-weight:500;
+
+}
+
+.sidebar-menu a:hover{
+
+    background:rgba(255,255,255,.20);
+
+    transform:translateX(6px);
+
+}
+
+.sidebar-menu .active{
+
+    background:white;
+
+    color:#2563eb;
+
+    font-weight:600;
+
+}
+
+/* ===========================
+   LOGOUT
+=========================== */
+
+.sidebar-bottom{
+
+    padding:25px;
+
+}
+
+.sidebar-bottom button{
+
+    width:100%;
+
+    padding:14px;
+
     border:none;
-    padding:8px 15px;
-    border-radius:5px;
+
+    border-radius:12px;
+
+    background:#ef4444;
+
+    color:white;
+
+    font-size:16px;
+
+    font-weight:bold;
+
     cursor:pointer;
+
+    transition:.3s;
+
+}
+
+.sidebar-bottom button:hover{
+
+    background:#dc2626;
+
+    transform:scale(1.03);
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:768px){
+
+.sidebar{
+
+    width:220px;
+
+}
+
 }

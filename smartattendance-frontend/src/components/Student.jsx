@@ -21,184 +21,281 @@ function Student() {
     }, []);
 
     const loadStudents = async () => {
-        const response = await API.get("/students");
-        setStudents(response.data);
+
+        try {
+
+            const response = await API.get("/students");
+
+            setStudents(response.data);
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
+
     };
 
     const saveStudent = async () => {
 
-        if (student.id) {
-            await API.put(`/students/${student.id}`, student);
-        } else {
-            await API.post("/students", student);
+        try {
+
+            if (student.id) {
+
+                await API.put(`/students/${student.id}`, student);
+
+            } else {
+
+                await API.post("/students", student);
+
+            }
+
+            setStudent({
+                name: "",
+                rollNumber: "",
+                department: "",
+                year: "",
+                email: ""
+            });
+
+            loadStudents();
+
+        } catch (error) {
+
+            console.log(error);
+
+            alert("Unable to save student");
+
         }
 
-        setStudent({
-            name: "",
-            rollNumber: "",
-            department: "",
-            year: "",
-            email: ""
-        });
-
-        loadStudents();
     };
 
     const editStudent = (s) => {
 
         setStudent({
+
             id: s.id,
+
             name: s.name,
+
             rollNumber: s.rollNumber,
+
             department: s.department,
+
             year: s.year,
+
             email: s.email
+
+        });
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
         });
 
     };
 
     const deleteStudent = async (id) => {
 
-        if (window.confirm("Are you sure you want to delete this student?")) {
+        if (window.confirm("Delete this student?")) {
+
             await API.delete(`/students/${id}`);
+
             loadStudents();
+
         }
 
     };
 
     return (
+
         <>
+
             <Navbar />
-        <div className="student-container">
 
-            <h2>Student Management</h2>
+            <div className="student-container">
 
-            <div className="student-form">
+                <div className="student-header">
 
-                <input
-                    placeholder="Name"
-                    value={student.name}
-                    onChange={(e) =>
-                        setStudent({ ...student, name: e.target.value })
-                    }
-                />
+                    <div>
 
-                <input
-                    placeholder="Roll Number"
-                    value={student.rollNumber}
-                    onChange={(e) =>
-                        setStudent({ ...student, rollNumber: e.target.value })
-                    }
-                />
+                        <h1>👨‍🎓 Student Management</h1>
 
-                <input
-                    placeholder="Department"
-                    value={student.department}
-                    onChange={(e) =>
-                        setStudent({ ...student, department: e.target.value })
-                    }
-                />
+                        <p>
+                            Add, edit, update and manage student information.
+                        </p>
 
-                <input
-                    type="number"
-                    placeholder="Year"
-                    value={student.year}
-                    onChange={(e) =>
-                        setStudent({ ...student, year: e.target.value })
-                    }
-                />
+                    </div>
 
-                <input
-                    placeholder="Email"
-                    value={student.email}
-                    onChange={(e) =>
-                        setStudent({ ...student, email: e.target.value })
-                    }
-                />
+                </div>
 
-                <button onClick={saveStudent}>
-                    {student.id ? "Update Student" : "Add Student"}
-                </button>
+                <div className="student-form">
 
-            </div>
+                    <input
+                        type="text"
+                        placeholder="Student Name"
+                        value={student.name}
+                        onChange={(e) =>
+                            setStudent({
+                                ...student,
+                                name: e.target.value
+                            })
+                        }
+                    />
 
-            <br />
+                    <input
+                        type="text"
+                        placeholder="Roll Number"
+                        value={student.rollNumber}
+                        onChange={(e) =>
+                            setStudent({
+                                ...student,
+                                rollNumber: e.target.value
+                            })
+                        }
+                    />
 
-            <input
-                type="text"
-                placeholder="🔍 Search by Name, Roll Number or Department"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                style={{
-                    width: "350px",
-                    padding: "10px",
-                    marginBottom: "20px",
-                    borderRadius: "5px",
-                    border: "1px solid gray"
-                }}
-            />
+                    <input
+                        type="text"
+                        placeholder="Department"
+                        value={student.department}
+                        onChange={(e) =>
+                            setStudent({
+                                ...student,
+                                department: e.target.value
+                            })
+                        }
+                    />
 
-            <table className="student-table">
+                    <input
+                        type="number"
+                        placeholder="Year"
+                        value={student.year}
+                        onChange={(e) =>
+                            setStudent({
+                                ...student,
+                                year: e.target.value
+                            })
+                        }
+                    />
 
-                <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Roll Number</th>
-                    <th>Department</th>
-                    <th>Year</th>
-                    <th>Email</th>
-                    <th>Action</th>
-                </tr>
-                </thead>
+                    <input
+                        type="email"
+                        placeholder="Email"
+                        value={student.email}
+                        onChange={(e) =>
+                            setStudent({
+                                ...student,
+                                email: e.target.value
+                            })
+                        }
+                    />
 
-                <tbody>
+                    <button onClick={saveStudent}>
 
-                {students
-                    .filter((s) =>
-                        s.name.toLowerCase().includes(search.toLowerCase()) ||
-                        s.rollNumber.toLowerCase().includes(search.toLowerCase()) ||
-                        s.department.toLowerCase().includes(search.toLowerCase())
-                    )
-                    .map((s) => (
+                        {student.id
+                            ? "Update Student"
+                            : "Add Student"}
 
-                        <tr key={s.id}>
-                            
-                            <td>{s.name}</td>
-                            <td>{s.rollNumber}</td>
-                            <td>{s.department}</td>
-                            <td>{s.year}</td>
-                            <td>{s.email}</td>
+                    </button>
 
-                            <td>
+                </div>
 
-                                <button
-                                    className="action-btn edit-btn"
-                                    onClick={() => editStudent(s)}
-                                >
-                                    Edit
-                                </button>
+                <div className="search-box">
 
-                                <button
-                                    className="action-btn delete-btn"
-                                    onClick={() => deleteStudent(s.id)}
-                                >
-                                    Delete
-                                </button>
+                    <input
 
-                            </td>
+                        type="text"
+
+                        placeholder="🔍 Search by Name, Roll Number or Department"
+
+                        value={search}
+
+                        onChange={(e) =>
+
+                            setSearch(e.target.value)
+
+                        }
+
+                    />
+
+                </div>
+
+                <table className="student-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>Name</th>
+
+                            <th>Roll Number</th>
+
+                            <th>Department</th>
+
+                            <th>Year</th>
+
+                            <th>Email</th>
+
+                            <th>Action</th>
 
                         </tr>
 
-                    ))}
+                    </thead>
 
-                </tbody>
+                    <tbody>
+                                            {students
+                        .filter((s) =>
+                            s.name.toLowerCase().includes(search.toLowerCase()) ||
+                            s.rollNumber.toLowerCase().includes(search.toLowerCase()) ||
+                            s.department.toLowerCase().includes(search.toLowerCase())
+                        )
+                        .map((s) => (
 
-            </table>
+                            <tr key={s.id}>
 
-        </div>
+                                <td>{s.name}</td>
+
+                                <td>{s.rollNumber}</td>
+
+                                <td>{s.department}</td>
+
+                                <td>{s.year}</td>
+
+                                <td>{s.email}</td>
+
+                                <td>
+
+                                    <button
+                                        className="action-btn edit-btn"
+                                        onClick={() => editStudent(s)}
+                                    >
+                                        ✏ Edit
+                                    </button>
+
+                                    <button
+                                        className="action-btn delete-btn"
+                                        onClick={() => deleteStudent(s.id)}
+                                    >
+                                        🗑 Delete
+                                    </button>
+
+                                </td>
+
+                            </tr>
+
+                        ))}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
         </>
 
     );
+
 }
 
 export default Student;

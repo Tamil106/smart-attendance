@@ -49,24 +49,20 @@ function DashboardChart() {
 
     //---------------- BAR CHART ----------------//
 
+    const departments = dailyChart.map(item => item.department);
+
     const barData = {
-        labels: ["CSE", "AIDS"],
+        labels: departments,
         datasets: [
             {
                 label: "Present",
                 backgroundColor: "#22c55e",
-                data: [
-                    dailyChart.find(x => x.department === "CSE")?.present || 0,
-                    dailyChart.find(x => x.department === "AIDS")?.present || 0
-                ]
+                data: dailyChart.map(item => item.present)
             },
             {
                 label: "Absent",
                 backgroundColor: "#ef4444",
-                data: [
-                    dailyChart.find(x => x.department === "CSE")?.absent || 0,
-                    dailyChart.find(x => x.department === "AIDS")?.absent || 0
-                ]
+                data: dailyChart.map(item => item.absent)
             }
         ]
     };

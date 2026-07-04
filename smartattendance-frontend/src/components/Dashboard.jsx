@@ -13,7 +13,8 @@ function Dashboard() {
         totalStudents: 0,
         presentToday: 0,
         absentToday: 0,
-        totalAttendance: 0
+        totalAttendance: 0,
+        lowAttendanceCount: 0
     });
 
     useEffect(() => {
@@ -21,114 +22,170 @@ function Dashboard() {
     }, []);
 
     const loadDashboard = async () => {
-        const response = await API.get("/dashboard");
-        setStats(response.data);
+        try {
+
+            const response = await API.get("/dashboard");
+
+            setStats(response.data);
+
+        } catch (error) {
+
+            console.log(error);
+
+        }
     };
 
     const logout = () => {
-        localStorage.removeItem("loggedIn");
+
+        localStorage.clear();
+
         navigate("/login");
+
     };
+
     return (
+
         <>
-            <Navbar/>
+
+            <Navbar />
 
             <div className="dashboard">
 
-                <h1>Smart Attendance Management System</h1>
+                {/* Header */}
 
-                <h3>Welcome, Admin</h3>
+                <div className="dashboard-header">
 
-                <div className="card-container">
+                    <div>
 
-                    <div className="card">
-                        <h2>👨‍🎓 Total Students</h2>
-                        <p>{stats.totalStudents}</p>
+                        <h1>📊 Dashboard</h1>
+
+                        <p>
+                            Welcome back, <b>Admin</b> 👋
+                        </p>
+
                     </div>
 
-                    <div className="card">
-                        <h2>✅ Present Today</h2>
-                        <p>{stats.presentToday}</p>
-                    </div>
-
-                    <div className="card">
-                        <h2>❌ Absent Today</h2>
-                        <p>{stats.absentToday}</p>
-                    </div>
-
-                    <div className="card">
-                        <h2>📋 Total Records</h2>
-                        <p>{stats.totalAttendance}</p>
-                    </div>
-
-                </div>
-
-                {/* Low Attendance Alert */}
-
-                <h2 style={{marginTop: "40px"}}>
-                    Low Attendance Alerts
-                </h2>
-
-                {stats.lowAttendanceCount > 0 ? (
-                    <div
-                        style={{
-                            background: "#ffe5e5",
-                            color: "#d32f2f",
-                            padding: "15px",
-                            borderRadius: "10px",
-                            marginTop: "20px",
-                            fontWeight: "bold"
-                        }}
+                    <button
+                        className="logout-btn"
+                        onClick={logout}
                     >
-                        ⚠️ {stats.lowAttendanceCount} student(s) have attendance below 75%.
-                    </div>
-                ) : (
-                    <div
-                        style={{
-                            background: "#e8f5e9",
-                            color: "#2e7d32",
-                            padding: "15px",
-                            borderRadius: "10px",
-                            marginTop: "20px",
-                            fontWeight: "bold"
-                        }}
-                    >
-                        ✅ Great! No students have low attendance.
-                    </div>
-                )}
-
-                <div className="menu">
-
-                    <button onClick={() => navigate("/students")}>
-                        Student Management
-                    </button>
-
-                    <br/>
-
-                    <button onClick={() => navigate("/attendance")}>
-                        Attendance
-                    </button>
-
-                    <br/>
-
-                    <button onClick={() => navigate("/reports")}>
-                        Reports
-                    </button>
-
-                    <br/>
-
-                    <button onClick={logout}>
                         Logout
                     </button>
 
                 </div>
 
-                <DashboardChart stats={stats}/>
+                {/* Cards */}
+
+                <div className="card-container">
+
+                    <div className="card students">
+
+                        <div className="icon">👨‍🎓</div>
+
+                        <h2>Total Students</h2>
+
+                        <p>{stats.totalStudents}</p>
+
+                    </div>
+
+                    <div className="card present">
+
+                        <div className="icon">✅</div>
+
+                        <h2>Present Today</h2>
+
+                        <p>{stats.presentToday}</p>
+
+                    </div>
+
+                    <div className="card absent">
+
+                        <div className="icon">❌</div>
+
+                        <h2>Absent Today</h2>
+
+                        <p>{stats.absentToday}</p>
+
+                    </div>
+
+                    <div className="card records">
+
+                        <div className="icon">📋</div>
+
+                        <h2>Total Records</h2>
+
+                        <p>{stats.totalAttendance}</p>
+
+                    </div>
+
+                </div>
+
+                {/* Attendance Chart */}
+
+                <div className="chart">
+
+                    <h2>📈 Attendance Statistics</h2>
+
+                    <DashboardChart stats={stats} />
+
+                </div>
+
+                {/* Alert */}
+
+                <div className="alert-section">
+
+                    <h2>⚠ Attendance Alert</h2>
+
+                    {stats.lowAttendanceCount > 0 ? (
+
+                        <div className="alert-danger">
+
+                            {stats.lowAttendanceCount} student(s) have attendance below 75%.
+
+                        </div>
+
+                    ) : (
+
+                        <div className="alert-success">
+
+                            🎉 Great! No students have low attendance.
+
+                        </div>
+
+                    )}
+
+                </div>
+
+                {/* Quick Actions */}
+
+                <div className="quick-actions">
+
+                    <h2>⚡ Quick Actions</h2>
+
+                    <div className="action-buttons">
+
+                        <button onClick={() => navigate("/students")}>
+                            👨‍🎓 Student Management
+                        </button>
+
+                        <button onClick={() => navigate("/attendance")}>
+                            📅 Attendance
+                        </button>
+
+                        <button onClick={() => navigate("/reports")}>
+                            📊 Reports
+                        </button>
+
+                    </div>
+
+                </div>
 
             </div>
 
         </>
+
     );
+
 }
 
 export default Dashboard;

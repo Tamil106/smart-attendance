@@ -1,57 +1,305 @@
-body{
-    margin:0;
-    font-family:Arial, sans-serif;
-    background:#f4f6f9;
-}
+/* ===========================
+   LOGIN PAGE
+=========================== */
 
 .login-container{
+    min-height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
+    position:relative;
+    overflow:hidden;
+    background:linear-gradient(135deg,#dbeafe,#bfdbfe,#93c5fd);
 }
+
+/* Large Decorative Circle */
+
+.login-container::before{
+    content:"";
+    position:absolute;
+    width:450px;
+    height:450px;
+    background:rgba(37,99,235,.15);
+    border-radius:50%;
+    top:-120px;
+    left:-120px;
+}
+
+/* Bottom Decorative Circle */
+
+.login-container::after{
+    content:"";
+    position:absolute;
+    width:350px;
+    height:350px;
+    background:rgba(255,255,255,.35);
+    border-radius:50%;
+    bottom:-100px;
+    right:-100px;
+}
+
+/* Decorative Shapes */
+
+.design1{
+    position:absolute;
+    top:18%;
+    right:12%;
+    width:90px;
+    height:90px;
+    border:3px solid rgba(37,99,235,.25);
+    transform:rotate(45deg);
+}
+
+.design2{
+    position:absolute;
+    bottom:15%;
+    left:12%;
+    width:60px;
+    height:60px;
+    border:3px solid rgba(59,130,246,.20);
+    transform:rotate(45deg);
+}
+
+/* ===========================
+   LOGIN BOX
+=========================== */
 
 .login-box{
-    background:white;
+
+    width:90%;
+
+    max-width:390px;
+
     padding:40px;
-    width:350px;
-    border-radius:10px;
-    box-shadow:0 5px 15px rgba(0,0,0,0.2);
-    text-align:center;
+
+    background:rgba(255,255,255,.65);
+
+    backdrop-filter:blur(15px);
+
+    border-radius:25px;
+
+    box-shadow:0 15px 35px rgba(0,0,0,.15);
+
 }
 
+/* ===========================
+   LOGO
+=========================== */
+
+.logo{
+
+    width:90px;
+    height:90px;
+
+    margin:auto;
+    margin-bottom:20px;
+
+    border-radius:50%;
+
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+    font-size:42px;
+
+    color:white;
+
+    box-shadow:0 8px 20px rgba(37,99,235,.3);
+
+}
+
+/* ===========================
+   TEXT
+=========================== */
+
 .login-box h2{
-    color:#1565c0;
-    text-align: center;
-    margin-bottom:5px;
+
+    text-align:center;
+
+    color:#1e3a8a;
+
+    margin-bottom:8px;
+
+    font-size:30px;
+
 }
 
 .login-box h3{
-    margin-bottom:25px;
-    color:#555;
+
+    text-align:center;
+
+    color:#475569;
+
+    font-weight:400;
+
 }
 
-.login-box input{
-    width:100%;
-    padding:12px;
-    margin:10px 0;
-    border-radius:5px;
-    border:1px solid #ccc;
-    box-sizing:border-box;
+.login-box h4{
+
+    text-align:center;
+
+    color:#2563eb;
+
+    margin-bottom:25px;
+
 }
+
+/* ===========================
+   INPUTS
+=========================== */
+
+.login-box input,
+.login-box select{
+
+    width:100%;
+
+    padding:14px;
+
+    margin-bottom:18px;
+
+    border-radius:12px;
+
+    border:1px solid #cbd5e1;
+
+    outline:none;
+
+    font-size:15px;
+
+    box-sizing:border-box;
+
+}
+
+.login-box input:focus,
+.login-box select:focus{
+
+    border-color:#2563eb;
+
+    box-shadow:0 0 8px rgba(37,99,235,.25);
+
+}
+
+/* ===========================
+   BUTTON
+=========================== */
 
 .login-box button{
+
     width:100%;
-    padding:12px;
-    margin-top:15px;
+
+    padding:14px;
+
     border:none;
-    border-radius:5px;
-    background:#1565c0;
+
+    border-radius:12px;
+
+    background:linear-gradient(135deg,#2563eb,#1d4ed8);
+
     color:white;
-    font-size:16px;
+
+    font-size:17px;
+
+    font-weight:600;
+
     cursor:pointer;
+
+    transition:.3s;
+
 }
 
 .login-box button:hover{
-    background:#0d47a1;
+
+    background:linear-gradient(135deg,#1d4ed8,#1e40af);
+
+    transform:translateY(-2px);
+
+}
+/* ===========================
+   TABLET
+=========================== */
+
+@media(max-width:768px){
+
+.login-container{
+
+    padding:20px;
+
+}
+
+.login-box{
+
+    padding:30px;
+
+}
+
+.login-box h2{
+
+    font-size:26px;
+
+}
+
+.logo{
+
+    width:75px;
+
+    height:75px;
+
+    font-size:35px;
+
+}
+
+}
+
+/* ===========================
+   MOBILE
+=========================== */
+
+@media(max-width:480px){
+
+.login-box{
+
+    padding:25px;
+
+}
+
+.login-box h2{
+
+    font-size:22px;
+
+}
+
+.login-box h3{
+
+    font-size:18px;
+
+}
+
+.login-box input,
+.login-box select,
+.login-box button{
+
+    padding:12px;
+
+    font-size:15px;
+
+}
+
+.logo{
+
+    width:70px;
+
+    height:70px;
+
+    font-size:30px;
+
+}
+
+.design1,
+.design2{
+
+    display:none;
+
+}
+
 }
