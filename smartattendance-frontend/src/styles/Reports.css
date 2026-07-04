@@ -168,7 +168,8 @@ body{
 
     background:white;
 
-    padding:20px;
+    padding:15px;
+    overflow-x:auto;
 
     border-radius:18px;
 
@@ -189,6 +190,7 @@ body{
 .department-table{
 
     width:100%;
+    min-width:500px;
 
     border-collapse:collapse;
 
@@ -287,6 +289,7 @@ body{
 .history-table{
 
     width:100%;
+    min-width:500px;
 
     border-collapse:collapse;
 
@@ -388,30 +391,8 @@ body{
 .reports-container{
 
     margin-left:0;
-
     width:100%;
-
-    min-height:100vh;
-
-    padding:90px 15px 20px;
-
-}
-
-.reports-header{
-
-    margin-bottom:20px;
-
-}
-
-.reports-header h1{
-
-    font-size:28px;
-
-}
-
-.reports-header p{
-
-    font-size:14px;
+    padding:85px 12px 20px;
 
 }
 
@@ -419,51 +400,49 @@ body{
 
     grid-template-columns:1fr;
 
-    gap:18px;
-
-}
-
-.summary-card{
-
-    padding:20px;
-
-}
-
-.summary-card h2{
-
-    font-size:30px;
-
 }
 
 .department-grid{
 
     grid-template-columns:1fr;
 
-    gap:20px;
-
 }
 
 .department-card{
 
-    padding:15px;
+    padding:10px;
+    overflow-x:auto;
 
 }
 
-.filter-box{
-
-    flex-direction:column;
-
-    gap:12px;
-
-}
-
-.filter-box input,
-
-.filter-box select{
-
+.department-table{
     width:100%;
+    min-width:350px;
 
-    min-width:100%;
+}
+
+.department-table th,
+.department-table td{
+
+    padding:10px;
+    font-size:13px;
+
+}
+/* Percentage Badge */
+
+.percentage-badge{
+
+    background:#2563eb;
+
+    color:white;
+
+    padding:6px 14px;
+
+    border-radius:20px;
+
+    font-weight:600;
+
+    display:inline-block;
 
 }
 
@@ -473,25 +452,31 @@ body{
 
 }
 
-.department-table,
-
 .history-table{
 
-    min-width:700px;
+    min-width:600px;
 
 }
 
-.department-table th,
-
-.department-table td,
-
 .history-table th,
-
 .history-table td{
 
-    padding:12px;
+    padding:10px;
+    font-size:13px;
 
-    font-size:14px;
+}
+
+.filter-box{
+
+    flex-direction:column;
+
+}
+
+.filter-box input,
+.filter-box select{
+
+    width:100%;
+    min-width:100%;
 
 }
 

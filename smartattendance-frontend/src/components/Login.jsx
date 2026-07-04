@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import API from "../services/api";
 import "../styles/Login.css";
 
 function Login() {
 
+    const navigate = useNavigate();
+
     const [role, setRole] = useState("ADMIN");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-    const [showPassword, setShowPassword] = useState(false);
 
     const login = async () => {
 
@@ -25,7 +27,7 @@ function Login() {
                     localStorage.setItem("loggedIn", "true");
                     localStorage.setItem("role", "ADMIN");
 
-                    window.location.href = "/dashboard";
+                    navigate("/dashboard", { replace: true });
 
                 } else {
 
@@ -37,20 +39,18 @@ function Login() {
 
                 const response = await API.post("/students/login", {
                     rollNumber: username,
-                    password: password
+                    password
                 });
 
                 localStorage.setItem("loggedIn", "true");
                 localStorage.setItem("role", "STUDENT");
                 localStorage.setItem("student", JSON.stringify(response.data));
 
-                window.location.href = "/student-dashboard";
+                navigate("/student-dashboard", { replace: true });
 
             }
 
         } catch (error) {
-
-            console.log(error);
 
             alert("Login Failed");
 
@@ -58,60 +58,60 @@ function Login() {
 
     };
 
-   return (
-    <div className="login-container">
-        <div className="design1"></div>
-        <div className="design2"></div>
+    return (
 
-        <div className="login-box">
-             
-             <div className="logo">🎓</div>
-            <h2>SMART ATTENDANCE</h2>
+        <div className="login-container">
 
-            <h3>Welcome Back 👋</h3>
+            <div className="design1"></div>
+            <div className="design2"></div>
 
-            <h4>{role} Login</h4>
+            <div className="login-box">
 
-            <select
-                value={role}
-                onChange={(e) => setRole(e.target.value)}
-            >
-                <option value="ADMIN">Admin</option>
-                <option value="STUDENT">Student</option>
-            </select>
+                <div className="logo">🎓</div>
 
-            <input
-                type="text"
-                placeholder={role === "ADMIN" ? "Username" : "Roll Number"}
-                value={username}
-                onChange={(e) => setUsername(e.target.value)}
-            />
+                <h2>SMART ATTENDANCE</h2>
 
-            <div className="password-box">
+                <h3>Welcome Back 👋</h3>
+
+                <h4>{role} Login</h4>
+
+                <select
+                    value={role}
+                    onChange={(e) => setRole(e.target.value)}
+                >
+                    <option value="ADMIN">Admin</option>
+                    <option value="STUDENT">Student</option>
+                </select>
+
                 <input
-                    type={showPassword ? "text" : "password"}
-                    placeholder="Password"
-                    value={password}
-                    onChange={(e)=>setPassword(e.target.value)}
+                    type="text"
+                    placeholder={
+                        role === "ADMIN"
+                            ? "Username"
+                            : "Roll Number"
+                    }
+                    value={username}
+                    onChange={(e) => setUsername(e.target.value)}
                 />
 
-                <span
-                    onClick={()=>setShowPassword(!showPassword)}
-                    className="eye"
-                >
-                    {showPassword ? "🙈" : "👁"}
-                </span>
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                />
+
+                <button onClick={login}>
+
+                    Login
+
+                </button>
 
             </div>
 
-            <button onClick={login}>
-                Login
-            </button>
-
         </div>
 
-    </div>
-);
+    );
 
 }
 

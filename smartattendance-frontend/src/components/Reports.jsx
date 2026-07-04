@@ -163,23 +163,16 @@ function Reports() {
                                     </thead>
 
                                     <tbody>
-
-                                        {departmentReport[department].map(student => (
-
-                                            <tr key={student.name}>
-
+                                         {departmentReport[department].map((student) => (
+                                             <tr key={student.name}>
                                                 <td>{student.name}</td>
-
                                                 <td>
-
-                                                    {student.percentage.toFixed(2)}%
-
+                                                    <span className="percentage-badge">
+                                                         {student.percentage.toFixed(2)}%
+                                                    </span>
                                                 </td>
-
-                                            </tr>
-
-                                        ))}
-
+                                             </tr>
+                                      ))}
                                     </tbody>
 
                                 </table>
@@ -261,7 +254,7 @@ function Reports() {
                             </thead>
 
                             <tbody>
-                                                                {filteredAttendance.map((record) => {
+                                     {filteredAttendance.map((record) => {
 
                                     const student = students.find(
                                         s => s.id === record.studentId

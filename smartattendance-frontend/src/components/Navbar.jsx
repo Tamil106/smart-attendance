@@ -14,10 +14,11 @@ function Navbar() {
 
     const logout = () => {
 
-        localStorage.clear();
+    localStorage.removeItem("loggedIn");
+    localStorage.removeItem("role");
+    localStorage.removeItem("student");
 
-        navigate("/login", { replace: true });
-
+    navigate("/login", { replace: true });
 
     };
 

@@ -179,36 +179,6 @@
     box-shadow:0 0 8px rgba(37,99,235,.25);
 
 }
-.password-box{
-
-    position:relative;
-
-}
-
-.password-box input{
-
-    width:100%;
-
-    padding-right:45px;
-
-}
-
-.eye{
-
-    position:absolute;
-
-    right:15px;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    cursor:pointer;
-
-    font-size:20px;
-
-}
-
 /* ===========================
    BUTTON
 =========================== */
