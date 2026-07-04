@@ -14,13 +14,13 @@ function Navbar() {
 
     const logout = () => {
 
-    localStorage.removeItem("loggedIn");
-    localStorage.removeItem("role");
-    localStorage.removeItem("student");
+    localStorage.clear();
 
     navigate("/login", { replace: true });
 
-    };
+    window.location.reload();
+
+};
 
     const closeMenu = () => {
 

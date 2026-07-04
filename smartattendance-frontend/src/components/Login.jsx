@@ -21,6 +21,7 @@ function Login() {
                     username,
                     password
                 });
+                console.log(response.data);
 
                 if (response.data === "Login Successful") {
 
@@ -28,6 +29,7 @@ function Login() {
                     localStorage.setItem("role", "ADMIN");
 
                     navigate("/dashboard", { replace: true });
+                    window.location.reload();
 
                 } else {
 
@@ -47,7 +49,7 @@ function Login() {
                 localStorage.setItem("student", JSON.stringify(response.data));
 
                 navigate("/student-dashboard", { replace: true });
-
+                window.location.reload();
             }
 
         } catch (error) {

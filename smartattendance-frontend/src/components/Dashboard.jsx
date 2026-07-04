@@ -56,21 +56,17 @@ function Dashboard() {
                 <div className="dashboard-header">
 
                     <div>
-
+                        <center>
                         <h1>📊 Dashboard</h1>
-
+                        
                         <p>
                             Welcome back, <b>Admin</b> 👋
                         </p>
+                        </center>
 
                     </div>
 
-                    <button
-                        className="logout-btn"
-                        onClick={logout}
-                    >
-                        Logout
-                    </button>
+                    
 
                 </div>
 
