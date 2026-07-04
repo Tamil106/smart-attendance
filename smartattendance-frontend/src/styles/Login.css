@@ -179,6 +179,35 @@
     box-shadow:0 0 8px rgba(37,99,235,.25);
 
 }
+.password-box{
+
+    position:relative;
+
+}
+
+.password-box input{
+
+    width:100%;
+
+    padding-right:45px;
+
+}
+
+.eye{
+
+    position:absolute;
+
+    right:15px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    cursor:pointer;
+
+    font-size:20px;
+
+}
 
 /* ===========================
    BUTTON
@@ -259,7 +288,11 @@
 
 .login-box{
 
-    padding:25px;
+    width:95%;
+
+    max-width:340px;
+
+    padding:20px;
 
 }
 
@@ -276,10 +309,17 @@
 }
 
 .login-box input,
-.login-box select,
+.login-box select{
+
+    padding:10px 12px;
+
+    font-size:14px;
+
+}
+
 .login-box button{
 
-    padding:12px;
+    padding:11px;
 
     font-size:15px;
 
@@ -301,5 +341,23 @@
     display:none;
 
 }
+
+}
+/* Fix Android Input Background */
+
+input,
+select{
+
+    background:#ffffff !important;
+
+    color:#111827 !important;
+
+    -webkit-text-fill-color:#111827;
+
+}
+
+input::placeholder{
+
+    color:#6b7280;
 
 }

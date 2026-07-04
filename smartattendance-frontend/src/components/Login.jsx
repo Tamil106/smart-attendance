@@ -7,6 +7,7 @@ function Login() {
     const [role, setRole] = useState("ADMIN");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [showPassword, setShowPassword] = useState(false);
 
     const login = async () => {
 
@@ -86,12 +87,22 @@ function Login() {
                 onChange={(e) => setUsername(e.target.value)}
             />
 
-            <input
-                type="password"
-                placeholder="Password"
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-            />
+            <div className="password-box">
+                <input
+                    type={showPassword ? "text" : "password"}
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e)=>setPassword(e.target.value)}
+                />
+
+                <span
+                    onClick={()=>setShowPassword(!showPassword)}
+                    className="eye"
+                >
+                    {showPassword ? "🙈" : "👁"}
+                </span>
+
+            </div>
 
             <button onClick={login}>
                 Login

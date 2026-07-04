@@ -10,6 +10,7 @@ function Navbar() {
     const role = localStorage.getItem("role");
 
     const [menuOpen, setMenuOpen] = useState(false);
+    
 
     const logout = () => {
 
@@ -17,7 +18,6 @@ function Navbar() {
 
         navigate("/login", { replace: true });
 
-        window.location.reload();
 
     };
 
@@ -88,7 +88,7 @@ function Navbar() {
                                     className={location.pathname === "/dashboard" ? "active" : ""}
                                     onClick={closeMenu}
                                 >
-                                    📊 Dashboard
+                                    Dashboard
                                 </Link>
 
                                 <Link
@@ -96,7 +96,7 @@ function Navbar() {
                                     className={location.pathname === "/students" ? "active" : ""}
                                     onClick={closeMenu}
                                 >
-                                    👨‍🎓 Students
+                                    Students
                                 </Link>
 
                                 <Link
@@ -104,7 +104,7 @@ function Navbar() {
                                     className={location.pathname === "/attendance" ? "active" : ""}
                                     onClick={closeMenu}
                                 >
-                                    📅 Attendance
+                                    Attendance
                                 </Link>
 
                                 <Link
@@ -112,7 +112,7 @@ function Navbar() {
                                     className={location.pathname === "/reports" ? "active" : ""}
                                     onClick={closeMenu}
                                 >
-                                    📈 Reports
+                                    Reports
                                 </Link>
 
                                 <Link
@@ -120,7 +120,7 @@ function Navbar() {
                                     className={location.pathname === "/generate-qr" ? "active" : ""}
                                     onClick={closeMenu}
                                 >
-                                    📱 QR Attendance
+                                    QR Attendance
                                 </Link>
 
                             </>
@@ -132,7 +132,7 @@ function Navbar() {
                                 className={location.pathname === "/student-dashboard" ? "active" : ""}
                                 onClick={closeMenu}
                             >
-                                🎓 My Dashboard
+                                My Dashboard
                             </Link>
 
                         )}
@@ -145,7 +145,7 @@ function Navbar() {
 
                     <button onClick={logout}>
 
-                        🚪 Logout
+                        Logout
 
                     </button>
 
