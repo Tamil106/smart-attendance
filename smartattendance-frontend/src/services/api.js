@@ -6,3 +6,4 @@ const API = axios.create({
 
 export default API;
 //"http://localhost:8080"
+//"https://smart-attendance-backend-2zm3.onrender.com"
